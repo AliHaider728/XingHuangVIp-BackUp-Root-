@@ -1,0 +1,13 @@
+- [Settlement dual-source](settlement-dual-source.md) — Odds API primary + API-Football fallback + 48h manual_review (not auto-void); timing from commence_time not placement; cron every 1 min with isRunning mutex.
+- [TON crypto Vite shim](ton-crypto-vite-shim.md) — @ton/core needs @ton/crypto peer dep (sha256_sync); create a browser shim + alias in vite.config.ts.
+- [TON deposit verifier fail-closed](ton-verifier-fail-closed.md) — isUsdtJetton and destinationMatches must return false (not true) when TONapi metadata is absent.
+- [Settlement market_type mismatch](settlement-market-type.md) — frontend stores display names ("Match Result") but worker checked API keys ("h2h"); always normalise before branching.
+- [Brand rename convention](brand-rename-convention.md) — capitalized `CupBett`=display text (safe to rename), lowercase `cupbett`=technical IDs (storage keys/emails/orderIds, do NOT rename).
+- [express-rate-limit IPv6 keyGenerator](express-rate-limit-ipv6.md) — custom keyGenerator touching req.ip must use ipKeyGenerator helper or v8 throws at boot; key per-user after authenticate.
+- [EVM deposit sender binding](deposit-sender-binding.md) — auto-credit must match on-chain `from` to user's SIWE wallet; scope by EVM network set, NOT fromAddress presence (Tron verifier also returns it).
+- [Wallet deposit UI gating](wallet-deposit-ui-gating.md) — connect/connected/success subviews must key on w3Connected first; reset deposit phase on disconnect or stale success card lingers; chainCfg drives supported-network detection.
+- [BTTS fallback fix](btts-fallback-fix.md) — WC returns HTTP 422 for btts; fetchOddsFromApi auto-retries without btts on 400/422.
+- [Wallet connect = only auth](wallet-connect-popups.md) — WalletPickerModal is the single login/signup popup; route all connect prompts via openLoginModal event or openWalletPicker(); AuthModal removed.
+- [BetsAPI out-of-volume 429](betsapi-volume-429.md) — valid key ≠ data; out-of-volume shows as 429 / 200 success:0 TOO_MANY_REQUESTS; treat as retryable (15min TTL), needs paid Volume Package.
+- [Referral→wallet verify coupling](referral-sessionstorage-coupling.md) — wallet verify reads referral from sessionStorage 'cb_ref', not React state; referral inputs must persist there or codes silently drop.
+- [Route guard auth restore](route-guard-auth-restore.md) — client redirect guards must gate on `!isLoading` or they bounce genuinely-connected users to home on refresh/deep-link before session restores.
